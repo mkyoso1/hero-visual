@@ -1,0 +1,220 @@
+/* ===================================================
+   Sada Kenbi  – BLACK × GOLD  CSS  (2025-06 完全版)
+   =================================================== */
+
+/* ---------- 1. ルート & リセット ---------- */
+:root{
+  --bk:#0c0c0c;
+  --gold:#d4af37;
+  --gold-dark:#b38d2e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--bk);
+  color:#f5f5f5;
+  font-family:'Shippori Mincho','Noto Serif JP',serif;
+  line-height:1.8;
+  word-break:normal;          /* ←自然な折り返し */
+  overflow-wrap:break-word;
+}
+a{color:var(--gold);text-decoration:none;transition:.3s}
+a:hover{color:#fff}
+img{width:100%;height:auto;display:block}
+
+/* ---------- 2. ヘッダー / ナビ ---------- */
+.site-header{
+  position:absolute;top:0;left:0;width:100%;
+  padding:16px 32px;display:flex;justify-content:space-between;align-items:center;
+  z-index:1000;background:transparent !important;
+}
+.logo img{height:48px}
+.nav-toggle{display:block;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer}
+.main-nav{display:none}
+.main-nav ul{list-style:none;margin:0;padding:0;display:flex;gap:24px}
+.main-nav a{color:#fff;font-weight:600;border-bottom:2px solid transparent}
+.main-nav a:hover{border-color:var(--gold)}
+.main-nav.show{
+  display:flex!important;flex-direction:column;position:absolute;top:60px;right:32px;
+  background:rgba(0,0,0,.95);border-radius:8px;padding:16px;gap:16px;z-index:999;
+}
+@media(min-width:768px){
+  .main-nav{display:flex!important;position:static;flex-direction:row;gap:24px;background:transparent;padding:0}
+  .nav-toggle{display:none}
+}
+
+/* ---------- 3. ヒーロー ---------- */
+.hero{
+  position:relative;min-height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* 3-1 スライダー（トップページ） */
+.hero-slider{position:absolute;inset:0;z-index:0}
+.hero-slider .slide{
+  position:absolute;inset:0;width:100%;height:100%;
+  background-size:cover;background-position:center;
+  opacity:0;animation:slideFade 15s linear infinite forwards;
+  z-index:-1;                      /* ✅ヒーローテキストの背面へ */
+}
+.hero-slider .slide:nth-child(1){animation-delay:0s}
+.hero-slider .slide:nth-child(2){animation-delay:5s}
+.hero-slider .slide:nth-child(3){animation-delay:10s}
+@keyframes slideFade{
+  0%{opacity:0;} 8%{opacity:1;} 33%{opacity:1;}
+  41%{opacity:0;} 100%{opacity:0;}
+}
+
+/* 3-2 静止ヒーロー（下層ページ） */
+.hero > .slide{
+  position:absolute;inset:0;width:100%;height:100%;
+  background-size:cover;background-position:center;
+  opacity:1!important;animation:none!important;z-index:-1;
+}
+
+/* 3-3 ヒーローテキスト */
+.hero-content{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:2;text-align:center;color:#fff;padding:0 20px;
+}
+.hero-content h1{font-size:2.8rem;color:#bfa231}
+.hero-content p{font-size:1.2rem;margin-top:.5rem}
+
+/* ---------- 4. ボタン ---------- */
+.btn{
+  background:linear-gradient(to right,#ffd700,#fff5b5);color:#111;
+  padding:10px 24px;border-radius:4px;font-weight:bold;margin-top:24px;
+  transition:.3s;box-shadow:0 0 8px rgba(255,215,0,.4);
+}
+.btn:hover{opacity:.85;transform:scale(1.05)}
+
+/* ---------- 5. レイアウト ---------- */
+.section{padding:80px 20px}
+.section.bg-light{background:#1b1b1b}
+.section-title{font-size:1.8rem;color:var(--gold);text-align:center;margin-bottom:48px}
+.center{max-width:960px;
+  margin:0 auto;
+  #text-align:center
+ }
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;max-width:1000px;margin:0 auto;
+}
+.card{
+  background:#222;border:1px solid #333;border-radius:8px;padding:24px;text-align:center;
+  transition:transform .3s;
+}
+.card:hover{transform:translateY(-6px)}
+.card h3{color:var(--gold);margin-bottom:12px}
+
+/* ---------- 6. SNS & フッター ---------- */
+.sns-links{text-align:center;padding:40px 0;background:#111}
+.sns-links ul{display:inline-flex;list-style:none;gap:24px}
+.sns-links img{width:32px;height:32px;filter:brightness(0) invert(1)}
+footer{background:#000;color:#888;text-align:center;padding:24px 0;font-size:.85rem}
+
+/* ---------- 7. モバイル調整 ---------- */
+@media(max-width:768px){
+  body{padding:0 12px;overflow-x:hidden}
+  .hero-content,.section,.center{padding:0 16px}
+  .hero-content h1{font-size:1.6rem;line-height:1.4}
+  .hero-content p,.section p{font-size:1rem;line-height:1.8}
+  .main-nav ul{flex-direction:column;gap:16px}
+}
+
+/* === ヒーロー文字の視認性アップ（修正版） === */
+
+/* ① オーバーレイ（スライダー含む背景全体をやや暗く） */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);  /* 0.25〜0.4で調整 */
+  z-index: 1;
+}
+
+/* ② ヒーローテキスト本体の中央配置 */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+}
+
+/* ③ テキストに黒帯と丸角背景（.text-boxに適用） */
+.hero-content .text-box {
+  background: rgba(0, 0, 0, 0.25);  /* 背景の濃さ */
+  padding: 20px;
+  border-radius: 8px;
+  display: inline-block; /* 横幅をテキストサイズに合わせる */
+}
+
+/* ④ テキストシャドウ */
+.hero-content h1,
+.hero-content p {
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* ===  ヘッダー（ロゴ＋ナビ）を半透明ガラス調  ================= */
+
+/* ①  ヘッダー全体を半透明化  */
+.site-header{
+  background: rgba(0,0,0,.25);       /* 半透明の黒  */
+  backdrop-filter: blur(4px);        /* ガラス調ぼかし  */
+  -webkit-backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  border-radius: 0 0 12px 12px;      /* 下だけ丸める（好みで調整） */
+}
+
+/* ②  ナビゲーション（モバイル展開時）も同じトーンで統一   */
+.main-nav{
+  background: rgba(0,0,0,.0);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+@media (min-width:768px){
+  .main-nav{
+    background: rgba(0,0,0,.0);
+    border-radius: 8px;
+    padding: 8px 16px;
+  }
+}
+
+/* ③  ロゴ画像の周囲にわずかな余白を追加してバランス調整（任意） */
+.logo img{
+  height:48px;
+  padding:4px;               /* ロゴと背景の間に余白 */
+}
+
+/* ④  ヘッダーの前面に固定表示する場合は ↓ を追加（必要なら） */
+.site-header{ position:fixed; }
+
+/* チャットアイコン */
+#chat-icon{
+  position:fixed;bottom:20px;left:20px;
+  background:#333;color:#fff;font-size:24px;
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:9999;
+  box-shadow:0 4px 8px rgba(0,0,0,.3);
+}
+
+/* チャットボックス */
+#chat-box{
+  display:none;                     /* 初期は非表示 */
+  position:fixed;bottom:80px;left:20px;
+  width:280px;max-height:350px;
+  background:#fefefe;border:1px solid #aaa;border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  z-index:9999;overflow:hidden;
+}
+#chat-header{
+  background:#333;color:#fff;padding:10px;font-weight:700;
+}
+#chat-content{
+  padding:10px;font-size:.9rem;overflow-y:auto;max-height:280px;
+}
